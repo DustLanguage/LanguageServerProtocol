@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters.TextDocument
+﻿namespace LanguageServer.Parameters.TextDocument
 {
-    public class SignatureHelpRegistrationOptions : TextDocumentRegistrationOptions
-    {
-        public string[] triggerCharacters { get; set; }
-    }
+  public class SignatureHelpRegistrationOptions : TextDocumentRegistrationOptions
+  {
+    public string[] TriggerCharacters { get; set; }
+  }
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters
+﻿namespace LanguageServer.Parameters
 {
-    public class TextDocumentEdit
-    {
-        public VersionedTextDocumentIdentifier textDocument { get; set; }
+  public class TextDocumentEdit
+  {
+    public VersionedTextDocumentIdentifier TextDocument { get; set; }
 
-        public TextEdit[] edits { get; set; }
-    }
+    public TextEdit[] Edits { get; set; }
+  }
 }

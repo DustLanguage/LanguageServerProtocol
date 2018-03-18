@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters.TextDocument
+﻿namespace LanguageServer.Parameters.TextDocument
 {
-    public class TextDocumentChangeRegistrationOptions : TextDocumentRegistrationOptions
-    {
-        public TextDocumentSyncKind syncKind { get; set; }
-    }
+  public class TextDocumentChangeRegistrationOptions : TextDocumentRegistrationOptions
+  {
+    public TextDocumentSyncKind SyncKind { get; set; }
+  }
 }

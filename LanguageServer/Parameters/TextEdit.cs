@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters
+﻿namespace LanguageServer.Parameters
 {
-    public class TextEdit
-    {
-        public Range range { get; set; }
+  public class TextEdit
+  {
+    public Range Range { get; set; }
 
-        public string newText { get; set; }
-    }
+    public string NewText { get; set; }
+  }
 }

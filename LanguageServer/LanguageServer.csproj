@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
     <Description>A library to handle Language Server Protocol (https://github.com/Microsoft/language-server-protocol).</Description>
@@ -7,10 +6,8 @@
     <Copyright>Copyright © 2017 INOMATA Kentaro</Copyright>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
     <PackageReference Include="Matarillo.IO" Version="1.0.0" />
   </ItemGroup>
-
 </Project>

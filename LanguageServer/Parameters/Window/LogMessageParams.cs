@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters.Window
+﻿namespace LanguageServer.Parameters.Window
 {
-    public class LogMessageParams
-    {
-        public MessageType type { get; set; }
-        public string message { get; set; }
-    }
+  public class LogMessageParams
+  {
+    public MessageType Type { get; set; }
+    public string Message { get; set; }
+  }
 }

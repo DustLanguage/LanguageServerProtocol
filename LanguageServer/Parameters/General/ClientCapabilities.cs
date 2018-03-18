@@ -1,88 +1,88 @@
 ﻿namespace LanguageServer.Parameters.General
 {
-    public class ClientCapabilities
-    {
-        public WorkspaceClientCapabilities workspace { get; set; }
+  public class ClientCapabilities
+  {
+    public WorkspaceClientCapabilities Workspace { get; set; }
 
-        public TextDocumentClientCapabilities textDocument { get; set; }
+    public TextDocumentClientCapabilities TextDocument { get; set; }
 
-        public dynamic experimental { get; set; }
-    }
+    public dynamic Experimental { get; set; }
+  }
 
-    public class WorkspaceClientCapabilities
-    {
-        public bool? applyEdit { get; set; }
+  public class WorkspaceClientCapabilities
+  {
+    public bool? ApplyEdit { get; set; }
 
-        public EditCapabilities workspaceEdit { get; set; }
+    public EditCapabilities WorkspaceEdit { get; set; }
 
-        public RegistrationCapabilities didChangeConfiguration { get; set; }
+    public RegistrationCapabilities DidChangeConfiguration { get; set; }
 
-        public RegistrationCapabilities didChangeWatchedFiles { get; set; }
+    public RegistrationCapabilities DidChangeWatchedFiles { get; set; }
 
-        public RegistrationCapabilities symbol { get; set; }
+    public RegistrationCapabilities Symbol { get; set; }
 
-        public RegistrationCapabilities executeCommand { get; set; }
-    }
+    public RegistrationCapabilities ExecuteCommand { get; set; }
+  }
 
-    public class EditCapabilities
-    {
-        public bool? documentChanges { get; set; }
-    }
+  public class EditCapabilities
+  {
+    public bool? DocumentChanges { get; set; }
+  }
 
-    public class RegistrationCapabilities
-    {
-        public bool? dynamicRegistration { get; set; }
-    }
+  public class RegistrationCapabilities
+  {
+    public bool? DynamicRegistration { get; set; }
+  }
 
-    public class TextDocumentClientCapabilities
-    {
-        public SynchronizationCapabilities synchronization { get; set; }
+  public class TextDocumentClientCapabilities
+  {
+    public SynchronizationCapabilities Synchronization { get; set; }
 
-        public CompletionCapabilities completion { get; set; }
+    public CompletionCapabilities Completion { get; set; }
 
-        public RegistrationCapabilities hover { get; set; }
+    public RegistrationCapabilities Hover { get; set; }
 
-        public RegistrationCapabilities signatureHelp { get; set; }
+    public RegistrationCapabilities SignatureHelp { get; set; }
 
-        public RegistrationCapabilities references { get; set; }
+    public RegistrationCapabilities References { get; set; }
 
-        public RegistrationCapabilities documentHighlight { get; set; }
+    public RegistrationCapabilities DocumentHighlight { get; set; }
 
-        public RegistrationCapabilities documentSymbol { get; set; }
+    public RegistrationCapabilities DocumentSymbol { get; set; }
 
-        public RegistrationCapabilities formatting { get; set; }
+    public RegistrationCapabilities Formatting { get; set; }
 
-        public RegistrationCapabilities rangeFormatting { get; set; }
+    public RegistrationCapabilities RangeFormatting { get; set; }
 
-        public RegistrationCapabilities onTypeFormatting { get; set; }
+    public RegistrationCapabilities OnTypeFormatting { get; set; }
 
-        public RegistrationCapabilities definition { get; set; }
+    public RegistrationCapabilities Definition { get; set; }
 
-        public RegistrationCapabilities codeAction { get; set; }
+    public RegistrationCapabilities CodeAction { get; set; }
 
-        public RegistrationCapabilities codeLens { get; set; }
+    public RegistrationCapabilities CodeLens { get; set; }
 
-        public RegistrationCapabilities documentLink { get; set; }
+    public RegistrationCapabilities DocumentLink { get; set; }
 
-        public RegistrationCapabilities rename { get; set; }
-    }
+    public RegistrationCapabilities Rename { get; set; }
+  }
 
-    public class SynchronizationCapabilities : RegistrationCapabilities
-    {
-        public bool? willSave { get; set; }
+  public class SynchronizationCapabilities : RegistrationCapabilities
+  {
+    public bool? WillSave { get; set; }
 
-        public bool? willSaveWaitUntil { get; set; }
+    public bool? WillSaveWaitUntil { get; set; }
 
-        public bool? didSave { get; set; }
-    }
+    public bool? DidSave { get; set; }
+  }
 
-    public class CompletionCapabilities : RegistrationCapabilities
-    {
-        public CompletionItemCapabilities completionItem { get; set; }
-    }
+  public class CompletionCapabilities : RegistrationCapabilities
+  {
+    public CompletionItemCapabilities CompletionItem { get; set; }
+  }
 
-    public class CompletionItemCapabilities
-    {
-        public bool? snippetSupport { get; set; }
-    }
+  public class CompletionItemCapabilities
+  {
+    public bool? SnippetSupport { get; set; }
+  }
 }

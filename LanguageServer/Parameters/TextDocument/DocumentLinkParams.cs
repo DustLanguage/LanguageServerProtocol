@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters.TextDocument
+﻿namespace LanguageServer.Parameters.TextDocument
 {
-    public class DocumentLinkParams
-    {
-        public TextDocumentIdentifier textDocument { get; set; }
-    }
+  public class DocumentLinkParams
+  {
+    public TextDocumentIdentifier TextDocument { get; set; }
+  }
 }

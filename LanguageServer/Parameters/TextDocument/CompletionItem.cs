@@ -1,33 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters.TextDocument
+﻿namespace LanguageServer.Parameters.TextDocument
 {
-    public class CompletionItem
-    {
-        public string label { get; set; }
+  public class CompletionItem
+  {
+    public string Label { get; set; }
 
-        public CompletionItemKind? kind { get; set; }
+    public CompletionItemKind? Kind { get; set; }
 
-        public string detail { get; set; }
+    public string Detail { get; set; }
 
-        public string documentation { get; set; }
+    public string Documentation { get; set; }
 
-        public string sortText { get; set; }
+    public string SortText { get; set; }
 
-        public string filterText { get; set; }
+    public string FilterText { get; set; }
 
-        public string insertText { get; set; }
+    public string InsertText { get; set; }
 
-        public InsertTextFormat? insertTextFormat { get; set; }
+    public InsertTextFormat? InsertTextFormat { get; set; }
 
-        public TextEdit textEdit { get; set; }
+    public TextEdit TextEdit { get; set; }
 
-        public TextEdit[] additionalTextEdits { get; set; }
+    public TextEdit[] AdditionalTextEdits { get; set; }
 
-        public Command command { get; set; }
+    public Command Command { get; set; }
 
-        public dynamic data { get; set; }
-    }
+    public dynamic Data { get; set; }
+  }
 }

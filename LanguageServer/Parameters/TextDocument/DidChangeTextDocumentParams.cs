@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters.TextDocument
+﻿namespace LanguageServer.Parameters.TextDocument
 {
-    public class DidChangeTextDocumentParams
-    {
-        public VersionedTextDocumentIdentifier textDocument { get; set; }
+  public class DidChangeTextDocumentParams
+  {
+    public VersionedTextDocumentIdentifier TextDocument { get; set; }
 
-        public TextDocumentContentChangeEvent[] contentChanges { get; set; }
-    }
+    public TextDocumentContentChangeEvent[] ContentChanges { get; set; }
+  }
 }

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters.TextDocument
+﻿namespace LanguageServer.Parameters.TextDocument
 {
-    public class FormattingOptions
-    {
-        public int tabSize { get; set; }
+  public class FormattingOptions
+  {
+    public int TabSize { get; set; }
 
-        public bool insertSpaces { get; set; }
+    public bool InsertSpaces { get; set; }
 
-        // Signature for further properties.
-        // [key: string]: boolean | number | string;
-    }
+    // Signature for further properties.
+    // [key: string]: boolean | number | string;
+  }
 }

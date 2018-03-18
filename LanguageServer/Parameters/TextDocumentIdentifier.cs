@@ -2,8 +2,8 @@
 
 namespace LanguageServer.Parameters
 {
-    public class TextDocumentIdentifier
-    {
-        public Uri uri { get; set; }
-    }
+  public class TextDocumentIdentifier
+  {
+    public Uri Uri { get; set; }
+  }
 }

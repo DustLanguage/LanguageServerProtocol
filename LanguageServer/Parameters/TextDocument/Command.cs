@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters.TextDocument
+﻿namespace LanguageServer.Parameters.TextDocument
 {
-    public class Command
-    {
-        public string title { get; set; }
+  public class Command
+  {
+    public string Title { get; set; }
 
-        public string command { get; set; }
+    // Not sure if this is correct
+    public string Name { get; set; }
 
-        public dynamic[] arguments { get; set; }
-    }
+    public dynamic[] Arguments { get; set; }
+  }
 }

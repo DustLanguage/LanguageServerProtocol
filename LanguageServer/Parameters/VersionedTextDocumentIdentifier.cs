@@ -1,7 +1,7 @@
 ﻿namespace LanguageServer.Parameters
 {
-    public class VersionedTextDocumentIdentifier : TextDocumentIdentifier
-    {
-        public long version { get; set; }
-    }
+  public class VersionedTextDocumentIdentifier : TextDocumentIdentifier
+  {
+    public long Version { get; set; }
+  }
 }

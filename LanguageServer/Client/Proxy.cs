@@ -1,56 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Client
+﻿namespace LanguageServer.Client
 {
-    public sealed class Proxy
+  public sealed class Proxy
+  {
+    private ClientProxy client;
+    private Connection connection;
+    private TextDocumentProxy textDocument;
+    private WindowProxy window;
+    private WorkspaceProxy workspace;
+
+    public Proxy(Connection connection)
     {
-        private Connection _connection;
-        private WindowProxy _window;
-        private ClientProxy _client;
-        private WorkspaceProxy _workspace;
-        private TextDocumentProxy _textDocument;
-
-        public Proxy(Connection connection)
-        {
-            _connection = connection;
-        }
-
-        public WindowProxy Window
-        {
-            get
-            {
-                _window = _window ?? new WindowProxy(_connection);
-                return _window;
-            }
-        }
-
-        public ClientProxy Client
-        {
-            get
-            {
-                _client = _client ?? new ClientProxy(_connection);
-                return _client;
-            }
-        }
-
-        public WorkspaceProxy Workspace
-        {
-            get
-            {
-                _workspace = _workspace ?? new WorkspaceProxy(_connection);
-                return _workspace;
-            }
-        }
-
-        public TextDocumentProxy TextDocument
-        {
-            get
-            {
-                _textDocument = _textDocument ?? new TextDocumentProxy(_connection);
-                return _textDocument;
-            }
-        }
+      this.connection = connection;
     }
+
+    public WindowProxy Window
+    {
+      get
+      {
+        window = window ?? new WindowProxy(connection);
+        return window;
+      }
+    }
+
+    public ClientProxy Client
+    {
+      get
+      {
+        client = client ?? new ClientProxy(connection);
+        return client;
+      }
+    }
+
+    public WorkspaceProxy Workspace
+    {
+      get
+      {
+        workspace = workspace ?? new WorkspaceProxy(connection);
+        return workspace;
+      }
+    }
+
+    public TextDocumentProxy TextDocument
+    {
+      get
+      {
+        textDocument = textDocument ?? new TextDocumentProxy(connection);
+        return textDocument;
+      }
+    }
+  }
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters.TextDocument
+﻿namespace LanguageServer.Parameters.TextDocument
 {
-    public class MarkedString
-    {
-        public string language { get; set; }
+  public class MarkedString
+  {
+    public string Language { get; set; }
 
-        public string value { get; set; }
-    }
+    public string Value { get; set; }
+  }
 }

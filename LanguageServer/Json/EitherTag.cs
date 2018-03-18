@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Json
+﻿namespace LanguageServer.Json
 {
-    public enum EitherTag
-    {
-        None,
-        Left,
-        Right,
-    }
+  public enum EitherTag
+  {
+    None,
+    Left,
+    Right
+  }
 }

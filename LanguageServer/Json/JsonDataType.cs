@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Json
+﻿namespace LanguageServer.Json
 {
-    public enum JsonDataType
-    {
-        Null = 1,
-        Boolean,
-        Number,
-        String,
-        Array,
-        Object,
-    }
+  public enum JsonDataType
+  {
+    Null = 1,
+    Boolean,
+    Number,
+    String,
+    Array,
+    Object
+  }
 }

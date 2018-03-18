@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters
+﻿namespace LanguageServer.Parameters
 {
-    public class TextDocumentRegistrationOptions
-    {
-        public DocumentFilter[] documentSelector { get; set; }
-    }
+  public class TextDocumentRegistrationOptions
+  {
+    public DocumentFilter[] DocumentSelector { get; set; }
+  }
 }

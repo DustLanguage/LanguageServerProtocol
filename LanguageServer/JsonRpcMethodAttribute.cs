@@ -1,22 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LanguageServer
 {
-    [AttributeUsage(AttributeTargets.Method)]
-    public class JsonRpcMethodAttribute : Attribute
+  [AttributeUsage(AttributeTargets.Method)]
+  public class JsonRpcMethodAttribute : Attribute
+  {
+    public JsonRpcMethodAttribute(string method)
     {
-        private string _method;
-
-        public JsonRpcMethodAttribute(string method)
-        {
-            _method = method;
-        }
-
-        public string Method
-        {
-            get => _method;
-        }
+      Method = method;
     }
+
+    public string Method { get; }
+  }
 }

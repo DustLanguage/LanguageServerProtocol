@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LanguageServer.Parameters
+﻿namespace LanguageServer.Parameters
 {
-    public sealed class _Void
+  public sealed class Void
+  {
+    private Void()
     {
-        private _Void()
-        {
-        }
     }
+  }
 }

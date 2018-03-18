@@ -2,42 +2,42 @@
 
 namespace LanguageServer.Parameters.General
 {
-    public class ServerCapabilities
-    {
-        public NumberOrObject<TextDocumentSyncKind, TextDocumentSyncOptions> textDocumentSync { get; set; }
+  public class ServerCapabilities
+  {
+    public NumberOrObject<TextDocumentSyncKind, TextDocumentSyncOptions> TextDocumentSync { get; set; }
 
-        public bool? hoverProvider { get; set; }
+    public bool? HoverProvider { get; set; }
 
-        public CompletionOptions completionProvider { get; set; }
+    public CompletionOptions CompletionProvider { get; set; }
 
-        public SignatureHelpOptions signatureHelpProvider { get; set; }
+    public SignatureHelpOptions SignatureHelpProvider { get; set; }
 
-        public bool? definitionProvider { get; set; }
+    public bool? DefinitionProvider { get; set; }
 
-        public bool? referencesProvider { get; set; }
+    public bool? ReferencesProvider { get; set; }
 
-        public bool? documentHighlightProvider { get; set; }
+    public bool? DocumentHighlightProvider { get; set; }
 
-        public bool? documentSymbolProvider { get; set; }
+    public bool? DocumentSymbolProvider { get; set; }
 
-        public bool? workspaceSymbolProvider { get; set; }
+    public bool? WorkspaceSymbolProvider { get; set; }
 
-        public bool? codeActionProvider { get; set; }
+    public bool? CodeActionProvider { get; set; }
 
-        public CodeLensOptions codeLensProvider { get; set; }
+    public CodeLensOptions CodeLensProvider { get; set; }
 
-        public bool? documentFormattingProvider { get; set; }
+    public bool? DocumentFormattingProvider { get; set; }
 
-        public bool? documentRangeFormattingProvider { get; set; }
+    public bool? DocumentRangeFormattingProvider { get; set; }
 
-        public DocumentOnTypeFormattingOptions documentOnTypeFormattingProvider { get; set; }
+    public DocumentOnTypeFormattingOptions DocumentOnTypeFormattingProvider { get; set; }
 
-        public bool? renameProvider { get; set; }
+    public bool? RenameProvider { get; set; }
 
-        public DocumentLinkOptions documentLinkProvider { get; set; }
+    public DocumentLinkOptions DocumentLinkProvider { get; set; }
 
-        public ExecuteCommandOptions executeCommandProvider { get; set; }
+    public ExecuteCommandOptions ExecuteCommandProvider { get; set; }
 
-        public dynamic experimental { get; set; }
-    }
+    public dynamic Experimental { get; set; }
+  }
 }

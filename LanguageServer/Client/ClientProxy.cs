@@ -1,47 +1,43 @@
-﻿using LanguageServer.Parameters;
+﻿using System.Threading.Tasks;
 using LanguageServer.Parameters.Client;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LanguageServer.Client
 {
-    public sealed class ClientProxy
+  public sealed class ClientProxy
+  {
+    private readonly Connection connection;
+
+    internal ClientProxy(Connection connection)
     {
-        private readonly Connection _connection;
-
-        internal ClientProxy(Connection connection)
-        {
-            _connection = connection;
-        }
-
-        public Task<VoidResult<ResponseError>> RegisterCapability(RegistrationParams @params)
-        {
-            var tcs = new TaskCompletionSource<VoidResult<ResponseError>>();
-            _connection.SendRequest(
-                new RequestMessage<RegistrationParams>
-                {
-                    id = IdGenerator.Instance.Next(),
-                    method = "client/registerCapability",
-                    @params = @params
-                },
-                (VoidResponseMessage<ResponseError> res) => tcs.TrySetResult(Message.ToResult(res)));
-            return tcs.Task;
-        }
-
-        public Task<VoidResult<ResponseError>> UnregisterCapability(UnregistrationParams @params)
-        {
-            var tcs = new TaskCompletionSource<VoidResult<ResponseError>>();
-            _connection.SendRequest(
-                new RequestMessage<UnregistrationParams>
-                {
-                    id = IdGenerator.Instance.Next(),
-                    method = "client/unregisterCapability",
-                    @params = @params
-                },
-                (VoidResponseMessage<ResponseError> res) => tcs.TrySetResult(Message.ToResult(res)));
-            return tcs.Task;
-        }
+      this.connection = connection;
     }
+
+    public Task<VoidResult<ResponseError>> RegisterCapability(RegistrationParams @params)
+    {
+      TaskCompletionSource<VoidResult<ResponseError>> tcs = new TaskCompletionSource<VoidResult<ResponseError>>();
+      connection.SendRequest(
+        new RequestMessage<RegistrationParams>
+        {
+          Id = IdGenerator.instance.Next(),
+          Method = "client/registerCapability",
+          Params = @params
+        },
+        (VoidResponseMessage<ResponseError> res) => tcs.TrySetResult(Message.ToResult(res)));
+      return tcs.Task;
+    }
+
+    public Task<VoidResult<ResponseError>> UnregisterCapability(UnregistrationParams @params)
+    {
+      TaskCompletionSource<VoidResult<ResponseError>> tcs = new TaskCompletionSource<VoidResult<ResponseError>>();
+      connection.SendRequest(
+        new RequestMessage<UnregistrationParams>
+        {
+          Id = IdGenerator.instance.Next(),
+          Method = "client/unregisterCapability",
+          Params = @params
+        },
+        (VoidResponseMessage<ResponseError> res) => tcs.TrySetResult(Message.ToResult(res)));
+      return tcs.Task;
+    }
+  }
 }

@@ -2,16 +2,16 @@
 
 namespace LanguageServer.Parameters.TextDocument
 {
-    public class Diagnostic
-    {
-        public Range range { get; set; }
+  public class Diagnostic
+  {
+    public Range Range { get; set; }
 
-	    public DiagnosticSeverity? severity { get; set; }
+    public DiagnosticSeverity? Severity { get; set; }
 
-	    public NumberOrString code { get; set; }
+    public NumberOrString Code { get; set; }
 
-        public string source { get; set; }
+    public string Source { get; set; }
 
-    	public string message { get; set; }
-    }
+    public string Message { get; set; }
+  }
 }
