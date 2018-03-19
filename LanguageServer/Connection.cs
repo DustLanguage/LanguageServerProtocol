@@ -36,7 +36,7 @@ namespace LanguageServer
     public async Task<bool> ReadAndHandle()
     {
       string json = await Read();
-      var messageTest = (MessageTest) Serializer.Instance.Deserialize(typeof(MessageTest), json);
+      MessageTest messageTest = (MessageTest) Serializer.Instance.Deserialize(typeof(MessageTest), json);
       if (messageTest == null) return false;
       if (messageTest.IsRequest)
         HandleRequest(messageTest.Method, messageTest.Id, json);
@@ -50,13 +50,13 @@ namespace LanguageServer
 
     private void HandleRequest(string method, NumberOrString id, string json)
     {
-      if (Handlers.TryGetRequestHandler(method, out var handler))
+      if (Handlers.TryGetRequestHandler(method, out RequestHandler handler))
         try
         {
-          var tokenSource = new CancellationTokenSource();
+          CancellationTokenSource tokenSource = new CancellationTokenSource();
           Handlers.AddCancellationTokenSource(id, tokenSource);
-          var request = Serializer.Instance.Deserialize(handler.RequestType, json);
-          var requestResponse = (ResponseMessageBase) handler.Handle(request, this, tokenSource.Token);
+          object request = Serializer.Instance.Deserialize(handler.RequestType, json);
+          ResponseMessageBase requestResponse = (ResponseMessageBase) handler.Handle(request, this, tokenSource.Token);
           Handlers.RemoveCancellationTokenSource(id);
           requestResponse.Id = id;
           SendMessage(requestResponse);
@@ -64,16 +64,16 @@ namespace LanguageServer
         catch (Exception ex)
         {
           Console.Error.WriteLine(ex);
-          var requestErrorResponse = Reflector.CreateErrorResponse(handler.ResponseType, ex.ToString());
+          ResponseMessageBase requestErrorResponse = Reflector.CreateErrorResponse(handler.ResponseType, ex.ToString());
           SendMessage(requestErrorResponse);
         }
     }
 
     private void HandleResponse(NumberOrString id, string json)
     {
-      if (Handlers.TryRemoveResponseHandler(id, out var handler))
+      if (Handlers.TryRemoveResponseHandler(id, out ResponseHandler handler))
       {
-        var response = Serializer.Instance.Deserialize(handler.ResponseType, json);
+        object response = Serializer.Instance.Deserialize(handler.ResponseType, json);
         handler.Handle(response);
       }
     }
@@ -81,15 +81,15 @@ namespace LanguageServer
     private void HandleCancellation(string json)
     {
       NotificationMessage<CancelParams> cancellation = (NotificationMessage<CancelParams>) Serializer.Instance.Deserialize(typeof(NotificationMessage<CancelParams>), json);
-      var id = cancellation.Params.Id;
-      if (Handlers.TryRemoveCancellationTokenSource(id, out var tokenSource)) tokenSource.Cancel();
+      NumberOrString id = cancellation.Params.Id;
+      if (Handlers.TryRemoveCancellationTokenSource(id, out CancellationTokenSource tokenSource)) tokenSource.Cancel();
     }
 
     private void HandleNotification(string method, string json)
     {
-      if (Handlers.TryGetNotificationHandler(method, out var handler))
+      if (Handlers.TryGetNotificationHandler(method, out NotificationHandler handler))
       {
-        var notification = Serializer.Instance.Deserialize(handler.NotificationType, json);
+        object notification = Serializer.Instance.Deserialize(handler.NotificationType, json);
         handler.Handle(notification, this);
       }
     }
@@ -98,7 +98,7 @@ namespace LanguageServer
       where TRequest : RequestMessageBase
       where TResponse : ResponseMessageBase
     {
-      var handler = new ResponseHandler(request.Id, typeof(TResponse), o => responseHandler((TResponse) o));
+      ResponseHandler handler = new ResponseHandler(request.Id, typeof(TResponse), o => responseHandler((TResponse) o));
       Handlers.AddResponseHandler(handler);
       SendMessage(request);
     }
@@ -125,7 +125,7 @@ namespace LanguageServer
       byte[] utf8 = Encoding.UTF8.GetBytes(json);
       lock (outputLock)
       {
-        using (var writer = new StreamWriter(output, Encoding.ASCII, 1024, true))
+        using (StreamWriter writer = new StreamWriter(output, Encoding.ASCII, 1024, true))
         {
           writer.Write($"Content-Length: {utf8.Length}\r\n");
           writer.Write("\r\n");

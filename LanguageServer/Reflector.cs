@@ -11,9 +11,9 @@ namespace LanguageServer
       ParameterInfo[] parameters = method.GetParameters();
       if (parameters.Length > 1) return false;
       if (parameters.Length == 1 && parameters[0].IsIn) return false;
-      var retType = method.ReturnType;
+      Type retType = method.ReturnType;
       if (retType == typeof(void)) return false;
-      var openRetType = retType.GetGenericTypeDefinition();
+      Type openRetType = retType.GetGenericTypeDefinition();
       return openRetType == typeof(Result<,>) || openRetType == typeof(VoidResult<>);
     }
 
@@ -22,7 +22,7 @@ namespace LanguageServer
       ParameterInfo[] parameters = method.GetParameters();
       if (parameters.Length > 1) return false;
       if (parameters.Length == 1 && parameters[0].IsIn) return false;
-      var retType = method.ReturnType;
+      Type retType = method.ReturnType;
       return retType == typeof(void);
     }
 
@@ -38,8 +38,8 @@ namespace LanguageServer
 
     internal static Type GetResponseType(MethodInfo method)
     {
-      var retType = method.ReturnType;
-      var openRetType = retType.GetGenericTypeDefinition();
+      Type retType = method.ReturnType;
+      Type openRetType = retType.GetGenericTypeDefinition();
       if (openRetType == typeof(Result<,>))
         return typeof(ResponseMessage<,>).MakeGenericType(retType.GenericTypeArguments[0], retType.GenericTypeArguments[1]);
       if (openRetType == typeof(VoidResult<>))
@@ -60,13 +60,13 @@ namespace LanguageServer
     private static RequestHandlerDelegate ForRequest4<T, TParams, TResult, TResponseError>(Type targetType, MethodInfo method, HandlerProvider provider)
       where TResponseError : ResponseError, new()
     {
-      var deleType = typeof(Func<T, TParams, Result<TResult, TResponseError>>);
+      Type deleType = typeof(Func<T, TParams, Result<TResult, TResponseError>>);
       Func<T, TParams, Result<TResult, TResponseError>> func = (Func<T, TParams, Result<TResult, TResponseError>>) method.CreateDelegate(deleType);
 
       return (r, c, t) =>
       {
         RequestMessage<TParams> request = (RequestMessage<TParams>) r;
-        var target = provider.CreateTargetObject(targetType, c, t);
+        object target = provider.CreateTargetObject(targetType, c, t);
         Result<TResult, TResponseError> result;
         try
         {
@@ -95,13 +95,13 @@ namespace LanguageServer
     private static RequestHandlerDelegate ForRequest3<T, TResult, TResponseError>(Type targetType, MethodInfo method, HandlerProvider provider)
       where TResponseError : ResponseError, new()
     {
-      var deleType = typeof(Func<T, Result<TResult, TResponseError>>);
+      Type deleType = typeof(Func<T, Result<TResult, TResponseError>>);
       Func<T, Result<TResult, TResponseError>> func = (Func<T, Result<TResult, TResponseError>>) method.CreateDelegate(deleType);
 
       return (r, c, t) =>
       {
-        var request = (VoidRequestMessage) r;
-        var target = provider.CreateTargetObject(targetType, c, t);
+        VoidRequestMessage request = (VoidRequestMessage) r;
+        object target = provider.CreateTargetObject(targetType, c, t);
         Result<TResult, TResponseError> result;
         try
         {
@@ -130,13 +130,13 @@ namespace LanguageServer
     private static RequestHandlerDelegate ForRequest2<T, TResponseError>(Type targetType, MethodInfo method, HandlerProvider provider)
       where TResponseError : ResponseError, new()
     {
-      var deleType = typeof(Func<T, VoidResult<TResponseError>>);
+      Type deleType = typeof(Func<T, VoidResult<TResponseError>>);
       Func<T, VoidResult<TResponseError>> func = (Func<T, VoidResult<TResponseError>>) method.CreateDelegate(deleType);
 
       return (r, c, t) =>
       {
-        var request = (VoidRequestMessage) r;
-        var target = provider.CreateTargetObject(targetType, c, t);
+        VoidRequestMessage request = (VoidRequestMessage) r;
+        object target = provider.CreateTargetObject(targetType, c, t);
         VoidResult<TResponseError> result;
         try
         {
@@ -163,13 +163,13 @@ namespace LanguageServer
 
     private static NotificationHandlerDelegate ForNotification2<T, TParams>(Type targetType, MethodInfo method, HandlerProvider provider)
     {
-      var deleType = typeof(Action<T, TParams>);
+      Type deleType = typeof(Action<T, TParams>);
       Action<T, TParams> action = (Action<T, TParams>) method.CreateDelegate(deleType);
 
       return (n, c) =>
       {
         NotificationMessage<TParams> notification = (NotificationMessage<TParams>) n;
-        var target = provider.CreateTargetObject(targetType, c);
+        object target = provider.CreateTargetObject(targetType, c);
         try
         {
           action((T) target, notification.Params);
@@ -188,13 +188,13 @@ namespace LanguageServer
 
     private static NotificationHandlerDelegate ForNotification1<T>(Type targetType, MethodInfo method, HandlerProvider provider)
     {
-      var deleType = typeof(Action<T>);
+      Type deleType = typeof(Action<T>);
       Action<T> action = (Action<T>) method.CreateDelegate(deleType);
 
       return (n, c) =>
       {
-        var notification = (VoidNotificationMessage) n;
-        var target = provider.CreateTargetObject(targetType, c);
+        VoidNotificationMessage notification = (VoidNotificationMessage) n;
+        object target = provider.CreateTargetObject(targetType, c);
         try
         {
           action((T) target);
@@ -213,12 +213,12 @@ namespace LanguageServer
 
     internal static RequestHandlerDelegate CreateRequestHandlerDelegate(Type targetType, MethodInfo method, HandlerProvider provider)
     {
-      var declaringType = method.DeclaringType;
+      Type declaringType = method.DeclaringType;
       ParameterInfo[] parameters = method.GetParameters();
       if (parameters.Length > 1) throw new ArgumentException($"signature mismatch: {method.Name}");
-      var paramsType = parameters.Length == 1 ? parameters[0].ParameterType : null;
-      var returnType = method.ReturnType;
-      var openReturnType = returnType.GetGenericTypeDefinition();
+      Type paramsType = parameters.Length == 1 ? parameters[0].ParameterType : null;
+      Type returnType = method.ReturnType;
+      Type openReturnType = returnType.GetGenericTypeDefinition();
       Type resultType;
       Type responseErrorType;
       if (openReturnType == typeof(Result<,>))
@@ -236,7 +236,7 @@ namespace LanguageServer
         throw new ArgumentException($"signature mismatch: {method.Name}");
       }
 
-      var factory =
+      MethodInfo factory =
         paramsType != null && resultType != null ? GetFactoryForRequest4(method, declaringType, paramsType, resultType, responseErrorType) :
         paramsType == null && resultType != null ? GetFactoryForRequest3(method, declaringType, resultType, responseErrorType) :
         GetFactoryForRequest2(method, declaringType, responseErrorType);
@@ -245,11 +245,11 @@ namespace LanguageServer
 
     internal static NotificationHandlerDelegate CreateNotificationHandlerDelegate(Type targetType, MethodInfo method, HandlerProvider provider)
     {
-      var declaringType = method.DeclaringType;
+      Type declaringType = method.DeclaringType;
       Type[] argTypes = method.GetParameters().Select(x => x.ParameterType).ToArray();
       if (argTypes.Length > 1) throw new ArgumentException($"signature mismatch: {method.Name}");
       if (method.ReturnType != typeof(void)) throw new ArgumentException($"signature mismatch: {method.Name}");
-      var factory = argTypes.Length == 1
+      MethodInfo factory = argTypes.Length == 1
         ? GetFactoryForNotification2(method, declaringType, argTypes[0])
         : GetFactoryForNotification1(method, declaringType);
       return (NotificationHandlerDelegate) factory.Invoke(provider, new object[] {targetType, method, provider});
@@ -257,9 +257,9 @@ namespace LanguageServer
 
     internal static ResponseMessageBase CreateErrorResponse(Type responseType, string errorMessage)
     {
-      var res = (ResponseMessageBase) Activator.CreateInstance(responseType);
-      var prop = responseType.GetRuntimeProperty("error");
-      var err = (ResponseError) Activator.CreateInstance(prop.PropertyType);
+      ResponseMessageBase res = (ResponseMessageBase) Activator.CreateInstance(responseType);
+      PropertyInfo prop = responseType.GetRuntimeProperty("error");
+      ResponseError err = (ResponseError) Activator.CreateInstance(prop.PropertyType);
       err.Code = ErrorCodes.InternalError;
       err.Message = errorMessage;
       prop.SetValue(res, err);

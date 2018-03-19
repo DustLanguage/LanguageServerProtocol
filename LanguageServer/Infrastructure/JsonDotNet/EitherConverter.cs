@@ -38,19 +38,19 @@ namespace LanguageServer.Infrastructure.JsonDotNet
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
-      var either = Activator.CreateInstance(objectType) as IEither;
-      var jsonType = Convert(reader.TokenType);
-      var tag = either.OnDeserializing(jsonType);
+      IEither either = Activator.CreateInstance(objectType) as IEither;
+      JsonDataType jsonType = Convert(reader.TokenType);
+      EitherTag tag = either.OnDeserializing(jsonType);
       if (tag == EitherTag.Left)
       {
-        var left = serializer.Deserialize(reader, either.LeftType);
+        object left = serializer.Deserialize(reader, either.LeftType);
         either.Left = left;
         return either;
       }
 
       if (tag == EitherTag.Right)
       {
-        var right = serializer.Deserialize(reader, either.RightType);
+        object right = serializer.Deserialize(reader, either.RightType);
         either.Right = right;
         return either;
       }
@@ -60,9 +60,9 @@ namespace LanguageServer.Infrastructure.JsonDotNet
 
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-      var either = value as IEither;
+      IEither either = value as IEither;
       if (either == null) return;
-      var objectValue = either.IsLeft ? either.Left : either.IsRight ? either.Right : null;
+      object objectValue = either.IsLeft ? either.Left : either.IsRight ? either.Right : null;
       if (objectValue == null) return;
       JToken.FromObject(objectValue, serializer).WriteTo(writer);
     }

@@ -52,7 +52,7 @@ namespace LanguageServer.Json
 
     public override bool Equals(object obj)
     {
-      var other = obj as NumberOrString;
+      NumberOrString other = obj as NumberOrString;
       return other == null ? false : Equals(other);
     }
   }

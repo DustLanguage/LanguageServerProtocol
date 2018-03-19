@@ -18,7 +18,7 @@ namespace LanguageServer
       : base(input, output)
     {
       Proxy = new Proxy(this);
-      var provider = new ConnectionHandlerProvider();
+      ConnectionHandlerProvider provider = new ConnectionHandlerProvider();
       provider.AddHandlers(Handlers, GetType());
     }
 

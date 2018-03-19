@@ -20,7 +20,7 @@ namespace LanguageServer.Client
 
     public NumberOrString Next()
     {
-      var ns = new NumberOrString(id);
+      NumberOrString ns = new NumberOrString(id);
       id = id == long.MaxValue ? 0L : id + 1;
       return ns;
     }

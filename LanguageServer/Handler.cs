@@ -19,7 +19,7 @@ namespace LanguageServer
 
     internal void AddRequestHandlers(IEnumerable<RequestHandler> requestHandlers)
     {
-      foreach (var handler in requestHandlers) AddRequestHandler(handler);
+      foreach (RequestHandler handler in requestHandlers) AddRequestHandler(handler);
     }
 
     internal bool TryGetRequestHandler(string method, out RequestHandler requestHandler)
@@ -44,7 +44,7 @@ namespace LanguageServer
 
     internal void AddNotificationHandlers(IEnumerable<NotificationHandler> notificationHandlers)
     {
-      foreach (var handler in notificationHandlers) AddNotificationHandler(handler);
+      foreach (NotificationHandler handler in notificationHandlers) AddNotificationHandler(handler);
     }
 
     internal bool TryGetNotificationHandler(string method, out NotificationHandler notificationHandler)

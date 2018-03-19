@@ -13,15 +13,15 @@ namespace LanguageServer
 
     public static void Register(Connection connection, Type[] serviceTypes)
     {
-      var rpcType = typeof(Service).GetTypeInfo();
+      TypeInfo rpcType = typeof(Service).GetTypeInfo();
       if (serviceTypes.Any(x => !rpcType.IsAssignableFrom(x.GetTypeInfo()))) throw new ArgumentException("Specify types derived from JsonRpcService", nameof(serviceTypes));
-      var provider = new ServiceHandlerProvider();
-      foreach (var serviceType in serviceTypes) provider.AddHandlers(connection.Handlers, serviceType);
+      ServiceHandlerProvider provider = new ServiceHandlerProvider();
+      foreach (Type serviceType in serviceTypes) provider.AddHandlers(connection.Handlers, serviceType);
     }
 
     public static void Register(Connection connection, Type serviceType)
     {
-      var provider = new ServiceHandlerProvider();
+      ServiceHandlerProvider provider = new ServiceHandlerProvider();
       provider.AddHandlers(connection.Handlers, serviceType);
     }
   }

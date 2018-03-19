@@ -8,8 +8,8 @@ namespace LanguageServer
   {
     internal void AddHandlers(Handlers handlers, Type type)
     {
-      var methodCallType = typeof(MethodCall).GetTypeInfo();
-      foreach (var method in type.GetRuntimeMethods())
+      TypeInfo methodCallType = typeof(MethodCall).GetTypeInfo();
+      foreach (MethodInfo method in type.GetRuntimeMethods())
       {
         string rpcMethod = method.GetCustomAttribute<JsonRpcMethodAttribute>()?.Method;
         if (rpcMethod != null) AddHandler(handlers, type, method, rpcMethod);
@@ -20,14 +20,14 @@ namespace LanguageServer
     {
       if (Reflector.IsRequestHandler(method))
       {
-        var requestHandlerDelegate = Reflector.CreateRequestHandlerDelegate(type, method, this);
-        var requestHandler = new RequestHandler(rpcMethod, Reflector.GetRequestType(method), Reflector.GetResponseType(method), requestHandlerDelegate);
+        RequestHandlerDelegate requestHandlerDelegate = Reflector.CreateRequestHandlerDelegate(type, method, this);
+        RequestHandler requestHandler = new RequestHandler(rpcMethod, Reflector.GetRequestType(method), Reflector.GetResponseType(method), requestHandlerDelegate);
         handlers.AddRequestHandler(requestHandler);
       }
       else if (Reflector.IsNotificationHandler(method))
       {
-        var notificationHandlerDelegate = Reflector.CreateNotificationHandlerDelegate(type, method, this);
-        var notificationHandler = new NotificationHandler(rpcMethod, Reflector.GetNotificationType(method), notificationHandlerDelegate);
+        NotificationHandlerDelegate notificationHandlerDelegate = Reflector.CreateNotificationHandlerDelegate(type, method, this);
+        NotificationHandler notificationHandler = new NotificationHandler(rpcMethod, Reflector.GetNotificationType(method), notificationHandlerDelegate);
         handlers.AddNotificationHandler(notificationHandler);
       }
     }
@@ -41,7 +41,7 @@ namespace LanguageServer
   {
     internal override object CreateTargetObject(Type targetType, Connection connection, CancellationToken token)
     {
-      var svc = (Service) Activator.CreateInstance(targetType);
+      Service svc = (Service) Activator.CreateInstance(targetType);
       svc.Connection = connection;
       svc.CancellationToken = token;
       return svc;
@@ -49,7 +49,7 @@ namespace LanguageServer
 
     internal override object CreateTargetObject(Type targetType, Connection connection)
     {
-      var svc = (Service) Activator.CreateInstance(targetType);
+      Service svc = (Service) Activator.CreateInstance(targetType);
       svc.Connection = connection;
       return svc;
     }
@@ -59,7 +59,7 @@ namespace LanguageServer
   {
     internal override object CreateTargetObject(Type targetType, Connection connection, CancellationToken token)
     {
-      var sc = (ServiceConnection) connection;
+      ServiceConnection sc = (ServiceConnection) connection;
       sc.CancellationToken = token;
       return sc;
     }
