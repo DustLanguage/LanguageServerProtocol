@@ -2,7 +2,7 @@
 {
   public class Position
   {
-    public long Line { get; set; }
-    public long Character { get; set; }
+    public int Line { get; set; }
+    public int Character { get; set; }
   }
 }
