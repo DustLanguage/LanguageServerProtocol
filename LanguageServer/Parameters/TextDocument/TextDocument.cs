@@ -1,4 +1,5 @@
 ﻿using System;
+using LanguageServer.Extensions;
 
 namespace LanguageServer.Parameters.TextDocument
 {
@@ -14,15 +15,7 @@ namespace LanguageServer.Parameters.TextDocument
 
     public int GetPosition(Position position)
     {
-      string[] lines = Text.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
-      int textPosition = position.Character;
-
-      for (int i = 0; i < position.Line; i++)
-      {
-        textPosition += lines[i].Length + Environment.NewLine.Length;
-      }
-
-      return textPosition;   
+      return Text.GetPosition(position);
     }
   }
 }
