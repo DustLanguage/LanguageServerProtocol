@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using LanguageServer.Parameters.Client;
 using LanguageServer.Parameters.Window;
 
 namespace LanguageServer.Client

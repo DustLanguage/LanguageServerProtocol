@@ -1,6 +1,6 @@
 ﻿using LanguageServer.Json;
 
-namespace LanguageServer.Client
+namespace LanguageServer.Parameters.Client
 {
   public class IdGenerator
   {
