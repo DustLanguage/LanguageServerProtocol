@@ -17,5 +17,27 @@ namespace LanguageServer.Parameters.TextDocument
     {
       return Text.GetPosition(position);
     }
+
+    public string GetWordAtPosition(Position position)
+    {
+      int index = Text.GetPosition(position);
+
+      int start = Text.Substring(0, index).LastIndexOfAny(new [] { ' ', '\n' }) + 1;
+      
+      if (start == -1)
+      {
+        start = 0;
+      }
+      
+      int end = Text.IndexOfAny(new[] {' ', '(', '\n'}, start);
+      
+      if (end == -1)
+      {
+        end = Text.Length;
+      }
+      
+      
+      return Text.Substring(start, end - start);
+    }
   }
 }
